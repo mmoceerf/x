@@ -96,9 +96,6 @@ typedef union { __SOCKADDR_ALLTYPES
 # undef __SOCKADDR_ONETYPE
 #endif
 
-# define __SOCKADDR_ARG		struct sockaddr *__restrict
-# define __CONST_SOCKADDR_ARG	const struct sockaddr *
-
 #ifdef __USE_GNU
 /* For `recvmmsg' and `sendmmsg'.  */
 struct mmsghdr

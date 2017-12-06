@@ -110,10 +110,6 @@ in this Software without prior written authorization from The Open Group.
 # define _X_INTERNAL
 #endif /* GNUC >= 4 */
 
-# define _X_EXPORT
-# define _X_HIDDEN
-# define _X_INTERNAL
-
 /* Branch prediction hints for individual conditionals */
 /* requires xproto >= 7.0.9 */
 #if defined(__GNUC__) && ((__GNUC__ * 100 + __GNUC_MINOR__) >= 303)

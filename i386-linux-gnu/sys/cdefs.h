@@ -46,12 +46,6 @@
 #  define __LEAF_ATTR
 # endif
 
-#undef __LEAF
-#  define __LEAF
-#undef __LEAF_ATTR
-#  define __LEAF_ATTR
-
-
 /* GCC can always grok prototypes.  For C++ programs we add throw()
    to help it optimize the function calls.  But this works only with
    gcc 2.8.x and egcs.  For gcc 3.2 and up we even mark C functions
@@ -73,14 +67,6 @@
 #  endif
 # endif
 
-#undef __THROW
-#undef __THROWNL
-#undef __NTH
-#   define __THROW
-#   define __THROWNL
-#   define __NTH(fct)	fct
-
-/* # define __inline  multiple definition of `__sigaddset' */		/* No inline functions.  */
 #else	/* Not GCC.  */
 
 # define __inline		/* No inline functions.  */
@@ -217,7 +203,6 @@
 #if !defined __GNUC__ || __GNUC__ < 2
 # define __attribute__(xyz)	/* Ignore */
 #endif
-# define __attribute__(xyz)	/* Ignore */
 
 /* At some point during the gcc 2.96 development the `malloc' attribute
    for functions was introduced.  We don't want to use it unconditionally
@@ -227,7 +212,6 @@
 #else
 # define __attribute_malloc__ /* Ignore */
 #endif
-# define __attribute_malloc__ /* Ignore */
 
 /* Tell the compiler which arguments to an allocation function
    indicate the size of the allocation.  */
@@ -237,7 +221,6 @@
 #else
 # define __attribute_alloc_size__(params) /* Ignore.  */
 #endif
-# define __attribute_alloc_size__(params) /* Ignore.  */
 
 /* At some point during the gcc 2.96 development the `pure' attribute
    for functions was introduced.  We don't want to use it unconditionally
@@ -247,7 +230,6 @@
 #else
 # define __attribute_pure__ /* Ignore */
 #endif
-# define __attribute_pure__ /* Ignore */
 
 /* This declaration tells the compiler that the value is constant.  */
 #if __GNUC_PREREQ (2,5)
@@ -255,7 +237,6 @@
 #else
 # define __attribute_const__ /* Ignore */
 #endif
-# define __attribute_const__ /* Ignore */
 
 /* At some point during the gcc 3.1 development the `used' attribute
    for functions was introduced.  We don't want to use it unconditionally
@@ -267,8 +248,6 @@
 # define __attribute_used__ __attribute__ ((__unused__))
 # define __attribute_noinline__ /* Ignore */
 #endif
-# define __attribute_used__ __attribute__ ((__unused__))
-# define __attribute_noinline__ /* Ignore */
 
 /* gcc allows marking deprecated functions.  */
 #if __GNUC_PREREQ (3,2)
@@ -276,7 +255,6 @@
 #else
 # define __attribute_deprecated__ /* Ignore */
 #endif
-# define __attribute_deprecated__ /* Ignore */
 
 /* At some point during the gcc 2.8 development the `format_arg' attribute
    for functions was introduced.  We don't want to use it unconditionally
@@ -289,7 +267,6 @@
 #else
 # define __attribute_format_arg__(x) /* Ignore */
 #endif
-# define __attribute_format_arg__(x) /* Ignore */
 
 /* At some point during the gcc 2.97 development the `strfmon' format
    attribute for functions was introduced.  We don't want to use it
@@ -301,7 +278,6 @@
 #else
 # define __attribute_format_strfmon__(a,b) /* Ignore */
 #endif
-# define __attribute_format_strfmon__(a,b) /* Ignore */
 
 /* The nonull function attribute allows to mark pointer parameters which
    must not be NULL.  */
@@ -310,7 +286,6 @@
 #else
 # define __nonnull(params)
 #endif
-# define __nonnull(params)
 
 /* If fortification mode, we warn about unused results of certain
    function calls which can lead to problems.  */
@@ -323,7 +298,6 @@
 #else
 # define __attribute_warn_unused_result__ /* empty */
 #endif
-# define __attribute_warn_unused_result__ /* empty */
 #ifndef __wur
 # define __wur /* Ignore */
 #endif
@@ -334,7 +308,6 @@
 #else
 # define __always_inline __inline
 #endif
-# define __always_inline __inline
 
 /* Associate error messages with the source location of the call site rather
    than with the source location inside the function.  */
@@ -343,7 +316,6 @@
 #else
 # define __attribute_artificial__ /* Ignore */
 #endif
-# define __attribute_artificial__ /* Ignore */
 
 /* GCC 4.3 and above with -std=c99 or -std=gnu99 implements ISO C99
    inline semantics, unless -fgnu89-inline is used.  Using __GNUC_STDC_INLINE__
@@ -371,15 +343,11 @@
 # define __fortify_function __extern_always_inline __attribute_artificial__
 #endif
 
-
-
 /* GCC 4.3 and above allow passing all anonymous arguments of an
    __extern_always_inline function to some other vararg function.  */
-#if 0   
 #if __GNUC_PREREQ (4,3)
 # define __va_arg_pack() __builtin_va_arg_pack ()
 # define __va_arg_pack_len() __builtin_va_arg_pack_len ()
-#endif
 #endif
 
 /* It is possible to compile containing GCC extensions even if GCC is
@@ -389,13 +357,11 @@
 #if !__GNUC_PREREQ (2,8)
 # define __extension__		/* Ignore */
 #endif
-# define __extension__		/* Ignore */
 
 /* __restrict is known in EGCS 1.2 and above. */
 #if !__GNUC_PREREQ (2,92)
 # define __restrict	/* Ignore */
 #endif
-# define __restrict	/* Ignore */
 
 /* ISO C99 also allows to declare arrays as non-overlapping.  The syntax is
      array_name[restrict]
@@ -414,8 +380,6 @@
 #  endif
 # endif
 #endif
-#   define __restrict_arr	/* Not supported.  */
-
 
 #if __GNUC__ >= 3
 # define __glibc_unlikely(cond)	__builtin_expect ((cond), 0)
@@ -424,8 +388,6 @@
 # define __glibc_unlikely(cond)	(cond)
 # define __glibc_likely(cond)	(cond)
 #endif
-# define __glibc_unlikely(cond)	(cond)
-# define __glibc_likely(cond)	(cond)
 
 #if (!defined _Noreturn \
      && (defined __STDC_VERSION__ ? __STDC_VERSION__ : 0) < 201112 \
